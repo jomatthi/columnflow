@@ -77,6 +77,16 @@ class BTagSFConfig:
     get_btag_file=(lambda self, external_files: external_files.btag_sf_corr),
     # function to determine the btag sf config
     get_btag_config=(lambda self: BTagSFConfig.new(self.config_inst.x.btag_sf)),
+    btag_uncs={
+        "hf": "hf",
+        "lf": "lf",
+        "hfstats1": "hfstats1",
+        "hfstats2": "hfstats2",
+        "lfstats1": "lfstats1",
+        "lfstats2": "lfstats2",
+        "cferr1": "cferr1",
+        "cferr2": "cferr2",
+    },
 )
 def btag_weights(
     self: Producer,
@@ -288,16 +298,16 @@ def btag_weights_post_init(self: Producer, task: law.Task, **kwargs) -> None:
     )
 
     # names of method-intrinsic uncertainties, mapped to how they are namend in produced columns
-    self.btag_uncs = {
-        "hf": "hf",
-        "lf": "lf",
-        "hfstats1": "hfstats1",
-        "hfstats2": "hfstats2",
-        "lfstats1": "lfstats1",
-        "lfstats2": "lfstats2",
-        "cferr1": "cferr1",
-        "cferr2": "cferr2",
-    }
+    # self.btag_uncs = {
+    #     # "hf": "hf",
+    #     # "lf": "lf",
+    #     # "hfstats1": "hfstats1",
+    #     # "hfstats2": "hfstats2",
+    #     # "lfstats1": "lfstats1",
+    #     # "lfstats2": "lfstats2",
+    #     # "cferr1": "cferr1",
+    #     # "cferr2": "cferr2",
+    # }
 
     # add uncertainty sources of the method itself
     if shift_inst.is_nominal:

@@ -415,7 +415,8 @@ def plot_all(
     # some default ylim settings based on yscale
     log_y = style_config.get("ax_cfg", {}).get("yscale", "linear") == "log"
 
-    ax_ymin = ax.get_ylim()[1] / 10**magnitudes if log_y else 0.0000001
+    # ax_ymin = ax.get_ylim()[1] / 10**magnitudes if log_y else 0.0000001
+    ax_ymin = 0.1 if log_y else 0.0000001
     ax_ymax = get_position(ax_ymin, ax.get_ylim()[1], factor=1 / (1 - whitespace_fraction), logscale=log_y)
     ax_kwargs.update({"ylim": (ax_ymin, ax_ymax)})
 
@@ -430,7 +431,8 @@ def plot_all(
         # hard-coded line at 1
         rax.axhline(y=1.0, linestyle="dashed", color="gray")
         rax_kwargs = {
-            "ylim": (0.72, 1.28),
+            # "ylim": (0.72, 1.28),
+            "ylim": (0.3, 1.7),
             "ylabel": "Ratio",
             "xlabel": "Variable",
             "yscale": "linear",
